@@ -2,7 +2,7 @@
 <suite parallel="false" name="NopCommerce">
 	<test name="Run on Chrome">
 		<classes>
-			<class name="com.nopcommerce.user.Level_01_Register_Login" />
+			<class name="com.nopcommerce.user.Level_02_Register_Login_BasePage_Part_I" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
