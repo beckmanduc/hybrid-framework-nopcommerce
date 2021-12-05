@@ -126,7 +126,6 @@ public class BasePage {
 		}
 	}
 
-	// WebElement
 	public By getByXpath(String xpathExpression) {
 		return By.xpath(xpathExpression);
 	}
