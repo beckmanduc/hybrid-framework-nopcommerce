@@ -61,11 +61,11 @@ public class Level_03_Page_Object_Pattern_Part_I {
 		homePage.clickToRegisterLink();
 		registerPage = new RegisterPageObject(driver);
 
-		registerPage.sendkeyToFirstNameTextbox("Automation");
-		registerPage.sendkeyToLastNameTextbox("FC");
-		registerPage.sendkeyToEmailTextbox("123@456#%*");
-		registerPage.sendkeyToPasswordTextbox("123456");
-		registerPage.sendkeyToConfirmPasswordTextbox("123456");
+		registerPage.inputToFirstNameTextbox("Automation");
+		registerPage.inputToLastNameTextbox("FC");
+		registerPage.inputToEmailTextbox("123@456#%*");
+		registerPage.inputToPasswordTextbox("123456");
+		registerPage.inputToConfirmPasswordTextbox("123456");
 		registerPage.clickToRegisterButton();
 
 		Assert.assertEquals(registerPage.getEmailErrorMessage(), "Wrong email");
@@ -77,11 +77,11 @@ public class Level_03_Page_Object_Pattern_Part_I {
 		homePage.clickToRegisterLink();
 		registerPage = new RegisterPageObject(driver);
 
-		registerPage.sendkeyToFirstNameTextbox("Automation");
-		registerPage.sendkeyToLastNameTextbox("FC");
-		registerPage.sendkeyToEmailTextbox(emailAddress);
-		registerPage.sendkeyToPasswordTextbox("123456");
-		registerPage.sendkeyToConfirmPasswordTextbox("123456");
+		registerPage.inputToFirstNameTextbox("Automation");
+		registerPage.inputToLastNameTextbox("FC");
+		registerPage.inputToEmailTextbox(emailAddress);
+		registerPage.inputToPasswordTextbox("123456");
+		registerPage.inputToConfirmPasswordTextbox("123456");
 
 		registerPage.clickToRegisterButton();
 
@@ -97,11 +97,11 @@ public class Level_03_Page_Object_Pattern_Part_I {
 		homePage.clickToRegisterLink();
 		registerPage = new RegisterPageObject(driver);
 
-		registerPage.sendkeyToFirstNameTextbox("Automation");
-		registerPage.sendkeyToLastNameTextbox("FC");
-		registerPage.sendkeyToEmailTextbox(emailAddress);
-		registerPage.sendkeyToPasswordTextbox("123456");
-		registerPage.sendkeyToConfirmPasswordTextbox("123456");
+		registerPage.inputToFirstNameTextbox("Automation");
+		registerPage.inputToLastNameTextbox("FC");
+		registerPage.inputToEmailTextbox(emailAddress);
+		registerPage.inputToPasswordTextbox("123456");
+		registerPage.inputToConfirmPasswordTextbox("123456");
 
 		registerPage.clickToRegisterButton();
 
@@ -113,11 +113,11 @@ public class Level_03_Page_Object_Pattern_Part_I {
 		homePage.clickToRegisterLink();
 		registerPage = new RegisterPageObject(driver);
 
-		registerPage.sendkeyToFirstNameTextbox("Automation");
-		registerPage.sendkeyToLastNameTextbox("FC");
-		registerPage.sendkeyToEmailTextbox(emailAddress);
-		registerPage.sendkeyToPasswordTextbox("123");
-		registerPage.sendkeyToConfirmPasswordTextbox("123");
+		registerPage.inputToFirstNameTextbox("Automation");
+		registerPage.inputToLastNameTextbox("FC");
+		registerPage.inputToEmailTextbox(emailAddress);
+		registerPage.inputToPasswordTextbox("123");
+		registerPage.inputToConfirmPasswordTextbox("123");
 
 		registerPage.clickToRegisterButton();
 
@@ -129,11 +129,11 @@ public class Level_03_Page_Object_Pattern_Part_I {
 		homePage.clickToRegisterLink();
 		registerPage = new RegisterPageObject(driver);
 
-		registerPage.sendkeyToFirstNameTextbox("Automation");
-		registerPage.sendkeyToLastNameTextbox("FC");
-		registerPage.sendkeyToEmailTextbox(emailAddress);
-		registerPage.sendkeyToPasswordTextbox("123456");
-		registerPage.sendkeyToConfirmPasswordTextbox("654321");
+		registerPage.inputToFirstNameTextbox("Automation");
+		registerPage.inputToLastNameTextbox("FC");
+		registerPage.inputToEmailTextbox(emailAddress);
+		registerPage.inputToPasswordTextbox("123456");
+		registerPage.inputToConfirmPasswordTextbox("654321");
 
 		registerPage.clickToRegisterButton();
 		

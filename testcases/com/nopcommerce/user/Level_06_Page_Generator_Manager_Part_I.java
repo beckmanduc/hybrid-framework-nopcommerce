@@ -1,0 +1,100 @@
+package com.nopcommerce.user;
+
+import java.util.Random;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import commons.BaseTest;
+import pageObjects.CustomerInfoPageObject;
+import pageObjects.HomePageObject;
+import pageObjects.LoginPageObject;
+import pageObjects.RegisterPageObject;
+
+public class Level_06_Page_Generator_Manager_Part_I extends BaseTest {
+	private WebDriver driver;
+	private HomePageObject homePage;
+	private RegisterPageObject registerPage;
+	private LoginPageObject loginPage;
+	private CustomerInfoPageObject customerInfoPage;
+	private String firstName, lastName, emailAddress, password;
+
+	@Parameters({ "browser", "url" })
+	@BeforeClass
+	public void beforeClass(String browserName, String url) {
+		// 1 - Open Url => Home Page
+		driver = getBrowserDriver(browserName, url);
+		homePage = new HomePageObject(driver);
+
+		firstName="John";
+		lastName="Terry";
+		emailAddress = "johnterry" + generateFakeNumber() + "@mail.net";
+		password="123456";
+	}
+
+	@Test
+	public void User_01_Register_To_System() {
+
+		// TDD: Test Driven Testing
+		// 2 - On Home Page => Click Register link => Open Register Page (Business page)
+		homePage.clickToRegisterLink();
+		registerPage = new RegisterPageObject(driver);
+		
+		registerPage.inputToFirstNameTextbox(firstName);
+		registerPage.inputToLastNameTextbox(lastName);
+		registerPage.inputToEmailTextbox(emailAddress);
+		registerPage.inputToPasswordTextbox(password);
+		registerPage.inputToConfirmPasswordTextbox(password);
+
+		registerPage.clickToRegisterButton();
+		
+		Assert.assertEquals(registerPage.getRegisteredSucessMessage(), "Your registration completed");
+		
+		// 3 - On Register page => switch to Home Page
+		registerPage.clickToLogoutLink();
+		homePage = new HomePageObject(driver);
+
+
+	}
+
+	@Test
+	public void User_02_Login_To_System() {
+		// 4 - On Home Page => Switch to Login Page
+		homePage.clickToLoginLink();
+		loginPage = new LoginPageObject(driver);
+		
+		loginPage.inputToEmailTextbox(emailAddress);
+		loginPage.inputToPasswordTextbox(password);
+		
+		// 5 - On Login Page => Switch to Home Page
+		loginPage.clickToLoginButton();
+		homePage = new HomePageObject(driver);
+	}
+
+	@Test
+	public void User_03_My_Accoount_Infor() {
+		// 6 - On Home Page => Switch to CustomerInfo Page
+		homePage.clickToMyAccountLink();
+		customerInfoPage =  new CustomerInfoPageObject(driver);
+		
+		Assert.assertEquals(customerInfoPage.getFirstNameTextboxValue(), firstName);
+		Assert.assertEquals(customerInfoPage.getLastNameTextboxValue(), lastName);
+		Assert.assertEquals(customerInfoPage.getEmailTextboxValue(), emailAddress);
+
+	}
+
+	@AfterClass
+	public void afterClass() {
+		driver.quit();
+	}
+
+	public int generateFakeNumber() {
+		Random rand = new Random();
+		return rand.nextInt(9999);
+	}
+
+}
