@@ -10,17 +10,17 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import pageObjects.CustomerInfoPageObject;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.RegisterPageObject;
+import pageObjects.users.UserCustomerInfoPageObject;
+import pageObjects.users.UserHomePageObject;
+import pageObjects.users.UserLoginPageObject;
+import pageObjects.users.UserRegisterPageObject;
 
 public class Level_06_Page_Generator_Manager_Part_I extends BaseTest {
 	private WebDriver driver;
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
-	private LoginPageObject loginPage;
-	private CustomerInfoPageObject customerInfoPage;
+	private UserHomePageObject homePage;
+	private UserRegisterPageObject registerPage;
+	private UserLoginPageObject loginPage;
+	private UserCustomerInfoPageObject customerInfoPage;
 	private String firstName, lastName, emailAddress, password;
 
 	@Parameters({ "browser", "url" })
@@ -28,7 +28,7 @@ public class Level_06_Page_Generator_Manager_Part_I extends BaseTest {
 	public void beforeClass(String browserName, String url) {
 		// 1 - Open Url => Home Page
 		driver = getBrowserDriver(browserName, url);
-		homePage = new HomePageObject(driver);
+		homePage = new UserHomePageObject(driver);
 
 		firstName="John";
 		lastName="Terry";
@@ -42,7 +42,7 @@ public class Level_06_Page_Generator_Manager_Part_I extends BaseTest {
 		// TDD: Test Driven Testing
 		// 2 - On Home Page => Click Register link => Open Register Page (Business page)
 		homePage.clickToRegisterLink();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		registerPage.inputToFirstNameTextbox(firstName);
 		registerPage.inputToLastNameTextbox(lastName);
@@ -56,7 +56,7 @@ public class Level_06_Page_Generator_Manager_Part_I extends BaseTest {
 		
 		// 3 - On Register page => switch to Home Page
 		registerPage.clickToLogoutLink();
-		homePage = new HomePageObject(driver);
+		homePage = new UserHomePageObject(driver);
 
 
 	}
@@ -65,21 +65,21 @@ public class Level_06_Page_Generator_Manager_Part_I extends BaseTest {
 	public void User_02_Login_To_System() {
 		// 4 - On Home Page => Switch to Login Page
 		homePage.clickToLoginLink();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 		
 		loginPage.inputToEmailTextbox(emailAddress);
 		loginPage.inputToPasswordTextbox(password);
 		
 		// 5 - On Login Page => Switch to Home Page
 		loginPage.clickToLoginButton();
-		homePage = new HomePageObject(driver);
+		homePage = new UserHomePageObject(driver);
 	}
 
 	@Test
 	public void User_03_My_Accoount_Infor() {
 		// 6 - On Home Page => Switch to CustomerInfo Page
 		homePage.clickToMyAccountLink();
-		customerInfoPage =  new CustomerInfoPageObject(driver);
+		customerInfoPage =  new UserCustomerInfoPageObject(driver);
 		
 		Assert.assertEquals(customerInfoPage.getFirstNameTextboxValue(), firstName);
 		Assert.assertEquals(customerInfoPage.getLastNameTextboxValue(), lastName);

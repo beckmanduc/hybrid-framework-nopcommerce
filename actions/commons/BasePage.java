@@ -16,21 +16,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pageObjects.AddressPageObject;
-import pageObjects.CustomerInfoPageObject;
-import pageObjects.OrdersPageObject;
-import pageObjects.PageGeneratorManager;
-import pageObjects.RewardPointPageObject;
+import pageObjects.admin.AdminLoginPageObject;
+import pageObjects.users.UserAddressPageObject;
+import pageObjects.users.UserCustomerInfoPageObject;
+import pageObjects.users.UserHomePageObject;
+import pageObjects.users.UserOrdersPageObject;
+import pageObjects.users.UserRewardPointPageObject;
 import pageUIs.BasePageUI;
 
 public class BasePage {
-	
+
 	private long longTimeout = 30;
 
 	public static BasePage getBasePage() {
-		return new BasePage();		
+		return new BasePage();
 	}
-	
+
 	public void openUrl(WebDriver driver, String url) {
 		driver.get(url);
 	}
@@ -124,7 +125,7 @@ public class BasePage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void sleepInMiliSecond(long timeoutInMiliSecond) {
 		try {
 			Thread.sleep(timeoutInMiliSecond);
@@ -270,7 +271,8 @@ public class BasePage {
 	public void highlightElement(WebDriver driver, String xpathExpression) {
 		WebElement element = getWebElement(driver, xpathExpression);
 		String originalStyle = element.getAttribute("style");
-		((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", "border: 2px solid red; border-style: dashed;");
+		((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style",
+				"border: 2px solid red; border-style: dashed;");
 		sleepInSecond(1);
 		((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", originalStyle);
 	}
@@ -329,49 +331,65 @@ public class BasePage {
 			return false;
 		}
 	}
-	
+
 	public void waitForElementVisible(WebDriver driver, String xpathExpression) {
 		new WebDriverWait(driver, longTimeout).until(ExpectedConditions.visibilityOfElementLocated(getByXpath(xpathExpression)));
 	}
-	
+
 	public void waitForElementClickable(WebDriver driver, String xpathExpression) {
 		new WebDriverWait(driver, longTimeout).until(ExpectedConditions.elementToBeClickable(getByXpath(xpathExpression)));
 	}
-	
+
 	public void waitForElementInvisible(WebDriver driver, String xpathExpression) {
 		new WebDriverWait(driver, longTimeout).until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(xpathExpression)));
 	}
-	
+
 	public void waitForAllElementVisible(WebDriver driver, String xpathExpression) {
 		new WebDriverWait(driver, longTimeout).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(xpathExpression)));
 	}
-	
+
 	public void waitForAllElementInvisible(WebDriver driver, String xpathExpression) {
 		new WebDriverWait(driver, longTimeout).until(ExpectedConditions.invisibilityOfAllElements(getWebElements(driver, xpathExpression)));
 	}
 
-	public OrdersPageObject openOrderPage(WebDriver driver) {
+	// User site
+	public UserOrdersPageObject openOrderPage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.ORDER_PAGE_LINK);
 		clickToElement(driver, BasePageUI.ORDER_PAGE_LINK);
-		return PageGeneratorManager.getOrderPage(driver);
+		return PageGeneratorManager.getUserOrderPage(driver);
 	}
 
-	public AddressPageObject openAddressPage(WebDriver driver) {
+	public UserAddressPageObject openAddressPage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.ADDRESS_PAGE_LINK);
 		clickToElement(driver, BasePageUI.ADDRESS_PAGE_LINK);
-		return PageGeneratorManager.getAddressPage(driver);
-	}
-	
-	public RewardPointPageObject openRewardPointPage(WebDriver driver) {
-		waitForElementClickable(driver, BasePageUI.REWARD_POINT_PAGE_LINK);
-		clickToElement(driver, BasePageUI.REWARD_POINT_PAGE_LINK);
-		return PageGeneratorManager.getRewardPointPage(driver);
+		return PageGeneratorManager.getUserAddressPage(driver);
 	}
 
-	public CustomerInfoPageObject openCustomerInfoPage(WebDriver driver) {
+	public UserRewardPointPageObject openRewardPointPage(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.REWARD_POINT_PAGE_LINK);
+		clickToElement(driver, BasePageUI.REWARD_POINT_PAGE_LINK);
+		return PageGeneratorManager.getUserRewardPointPage(driver);
+	}
+
+	public UserCustomerInfoPageObject openCustomerInfoPage(WebDriver driver) {
 		waitForElementClickable(driver, BasePageUI.CUSTOMER_INFO_PAGE_LINK);
 		clickToElement(driver, BasePageUI.CUSTOMER_INFO_PAGE_LINK);
-		return PageGeneratorManager.getCustomerInfoPage(driver);
+		return PageGeneratorManager.getUserCustomerInfoPage(driver);
 	}
-	
+
+	public UserHomePageObject clickToUserLogoutLink(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.USER_LOGOUT_LINK);
+		clickToElement(driver, BasePageUI.USER_LOGOUT_LINK);
+		return PageGeneratorManager.getUserHomePage(driver);
+
+	}
+
+	//Admin site
+	public AdminLoginPageObject clickToAdminLogoutLink(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.ADMIN_LOGOUT_LINK);
+		clickToElement(driver, BasePageUI.ADMIN_LOGOUT_LINK);
+		return PageGeneratorManager.getAdminLoginPage(driver);
+
+	}
+
 }
